@@ -24,6 +24,6 @@
 
 ### **Spelling corrrection using machine translation techniques:**
 
-1. The script for machine translation can be found in the `machine translation folder`
+1. The script for machine translation can be found in the `Machine Translation folder`
 
 - Plan of action: https://docs.google.com/document/d/1aAzRwka9W3B8xB6kuggZy0P93VlbCZfjxQraok2Vl10/edit?usp=sharing

@@ -43,15 +43,20 @@ def main():
     speaker = 'M04'
     source = "yip-i/torgo_xlsr_finetune-"
 
+    # model to create the transcriptions
     model = SpeechRecognitionModel(source + speaker + "-2")
     data = load_dataset('csv', data_files='output.csv')
     data = data.cast_column("audio", Audio(sampling_rate=16_000))
 
+    # held out speaker data
     speaker_data = data['train'].filter(
         lambda x: x == speaker, input_columns=['speaker_id'])
+    
+    # other speaker data
     other_speakers_data = data['train'].filter(
         lambda x: x != speaker, input_columns=['speaker_id'])
 
+    # data preprocessing
     speaker_data = speaker_data.map(remove_special_characters)
     other_speakers_data = other_speakers_data.map(
         remove_special_characters)
