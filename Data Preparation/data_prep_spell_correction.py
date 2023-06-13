@@ -5,18 +5,25 @@ from tqdm import tqdm
 import json
 
 # Function to remove special characters from text
+
+
 def remove_special_characters(batch):
     chars_to_ignore_regex = '[\,\?\.\!\-\;\:\"]'
 
-    batch["text"] = re.sub(chars_to_ignore_regex, '', batch["text"]).upper() + " "
+    batch["text"] = re.sub(chars_to_ignore_regex, '',
+                           batch["text"]).upper() + " "
     return batch
 
 # Function to save data to a JSON file
+
+
 def save_to_json(data, filename):
     with open(filename, 'w') as jsonfile:
         json.dump(data, jsonfile, indent=4)
 
 # Function to preprocess and transcribe the data
+
+
 def prep_training_data(model, dataset):
     references = []
     for example in tqdm(dataset):
@@ -31,30 +38,41 @@ def prep_training_data(model, dataset):
         references.append(row)
     return references
 
-def main(): 
-    speaker = 'M04'
 
-    model = SpeechRecognitionModel("yip-i/torgo_xlsr_finetune-" + speaker + "-2")
+def main():
+    speaker = 'M04'
+    source = "yip-i/torgo_xlsr_finetune-"
+
+    # model to create the transcriptions
+    model = SpeechRecognitionModel(source + speaker + "-2")
     data = load_dataset('csv', data_files='output.csv')
     data = data.cast_column("audio", Audio(sampling_rate=16_000))
 
-    timit = data['train'].filter(lambda x: x == speaker, input_columns=['speaker_id'])
-    train_data_transcribed = data['train'].filter(lambda x: x != speaker, input_columns=['speaker_id'])
+    # held out speaker data
+    speaker_data = data['train'].filter(
+        lambda x: x == speaker, input_columns=['speaker_id'])
+    
+    # other speaker data
+    other_speakers_data = data['train'].filter(
+        lambda x: x != speaker, input_columns=['speaker_id'])
 
-    timit = timit.map(remove_special_characters)
-    train_data_transcribed = train_data_transcribed.map(remove_special_characters)
+    # data preprocessing
+    speaker_data = speaker_data.map(remove_special_characters)
+    other_speakers_data = other_speakers_data.map(
+        remove_special_characters)
 
     # Prepare and transcribe the data for the held-out speaker
-    timit_transcribed = prep_training_data(model, timit)
+    speaker_transcribed = prep_training_data(model, speaker_data)
 
     # Save the transcribed data for the held-out speaker to a JSON file
-    save_to_json(timit_transcribed, "speaker_M04.json")
+    save_to_json(speaker_transcribed, "speaker_M04.json")
 
     # Prepare and transcribe the data for the remaining speakers
-    train_data_transcribed = prep_training_data(model, train_data_transcribed)
+    train_data_transcribed = prep_training_data(model, other_speakers_data)
 
     # Save the transcribed data for the remaining speakers to a JSON file
     save_to_json(train_data_transcribed, "M04_other_speakers.json")
+
 
 if __name__ == "__main__":
     main()
