@@ -26,4 +26,17 @@
 
 1. The script for machine translation can be found in the `Machine Translation` folder
 
-- Plan of action: https://docs.google.com/document/d/1aAzRwka9W3B8xB6kuggZy0P93VlbCZfjxQraok2Vl10/edit?usp=sharing
+   - Plan of action: https://docs.google.com/document/d/1aAzRwka9W3B8xB6kuggZy0P93VlbCZfjxQraok2Vl10/edit?usp=sharing
+
+2. Files inside the folder:
+   - `Machine_Translation_F01.ipynb`: script with all the training, evaluation and testing code for speaker F01
+   - `Spell_Correction_Training_Script_Machine_Translation.ipynb`: script for training the machine translation model
+   - `Spell_Correction_Evaluation_and_Testing_Script_Machine_Translation.ipynb`: script for testing the machine translation model
+   - `machine_translation_tutorial.ipynb`: script for machine translation tutorial from HuggingFace
+
+3. Links:
+   -  Training Script : https://colab.research.google.com/drive/13OUCdq2V_IpmMvF_NOwZVwMZSAh0GfYy?usp=sharing
+   -  Evaluation and Testing Script : https://colab.research.google.com/drive/1q3QPmm49yJFunvUYI5JFQDddsHIoVzHx?usp=sharing   
+   -  Script for F01 Speaker : https://colab.research.google.com/drive/1lhIKDb2JITULf3bgC97YQ1XM8frPV-AJ?usp=sharing
+
+
