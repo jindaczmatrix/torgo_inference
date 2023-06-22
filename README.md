@@ -1,10 +1,28 @@
 # Torgo_Testing/Torgo Inference:
 
+This repository contains files related to running ASR training to post processing the ASR transcripts using spell correction. Follow the files below to understand the whole process.
+
 ### **General Guidelines:**
 
 - Torgo files are expected base on output.csv to be in content/downloads/Torgo.
 - All Torgo speakers are directly under the Torgo folder.
 - Testing works best in .py file rather than Notebook.
+
+### Automatic Speech Recognition Training:
+1. Basic understanding of wav2vec2 (will need to have a Huggingface ang Google Collab account):
+   - `Finetuning wav2vec tutorial`: https://huggingface.co/blog/fine-tune-wav2vec2-english
+2. Work with Torgo dataset:
+   - ASR finetuning of Torgo dataset with xlsr-53 wav2vec2 model: https://colab.research.google.com/drive/1kX_pBURiaujpuDYaB8O1hrLLQrK8bWsQ
+3. Adding a language model: https://colab.research.google.com/drive/1AIgP6lc7BZTDrlU5yu83R05QDesWv4mw
+4. All the ASR models are available on Huggingface under the Ian Yip's repository (https://huggingface.co/yip-i)
+
+### Files inside the `Data Preparation` folder:
+- `asr_testing_jonatas.ipynb`: Collab script with ASR testing with model available in research community (jonatasgrosman)
+- `asr_testing_jonatas.py`: Python script for the `asr_testing_jonatas.ipynb` file
+- `asr_testing_lm.py`: Python script with ASR testing with language model
+- `correction_algo_prep.py and correction_data_demo`: base data preparation file and demo file for `data_prep_spell_correction.py` file
+- `data_prep_spell_correction.py`: data preparation for spelling correction
+- `output_og.csv and output.csv`: datasets for ASR training
 
 ### **Running the script to prepare data for spelling corrrection using machine translation techniques:**
 
@@ -38,5 +56,7 @@
    -  Training Script : https://colab.research.google.com/drive/13OUCdq2V_IpmMvF_NOwZVwMZSAh0GfYy?usp=sharing
    -  Evaluation and Testing Script : https://colab.research.google.com/drive/1q3QPmm49yJFunvUYI5JFQDddsHIoVzHx?usp=sharing   
    -  Script for F01 Speaker : https://colab.research.google.com/drive/1lhIKDb2JITULf3bgC97YQ1XM8frPV-AJ?usp=sharing
+
+4. All the Spelling correction models are available on Huggingface under Monideep Chakraborti's repository (https://huggingface.co/monideep2255)
 
 
