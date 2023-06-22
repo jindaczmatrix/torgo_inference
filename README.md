@@ -9,7 +9,7 @@ This repository contains files related to running ASR training to post processin
 - Testing works best in .py file rather than Notebook.
 
 ### Automatic Speech Recognition Training:
-1. Basic understanding of wav2vec2 (will need to have a Huggingface ang Google Collab account):
+1. Basic understanding of wav2vec2 (will need to have a Huggingface and Google Collab account):
    - `Finetuning wav2vec tutorial`: https://huggingface.co/blog/fine-tune-wav2vec2-english
 2. Work with Torgo dataset:
    - ASR finetuning of Torgo dataset with xlsr-53 wav2vec2 model: https://colab.research.google.com/drive/1kX_pBURiaujpuDYaB8O1hrLLQrK8bWsQ
