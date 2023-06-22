@@ -1,6 +1,6 @@
 # Torgo_Testing/Torgo Inference:
 
-This repository contains files related to running ASR training to post processing the ASR transcripts using spell correction. Follow the files below to understand the whole process.
+This repository contains files related to running ASR training to post processing the ASR transcripts using spelling correction. Follow the files below to understand the whole process.
 
 ### **General Guidelines:**
 
