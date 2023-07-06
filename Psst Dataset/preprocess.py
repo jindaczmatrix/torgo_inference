@@ -16,62 +16,29 @@ def convert_tsv_data_to_csv(dataset):
     """
     Reads in either the psst training, testing or validation data and writes is to a csv file. The function returns the dataset with 
     the desired column information
-
     Args: dataset - The dataset to read and convert to csv. 
     """
     try:
-        if dataset == test_directory:
 
-            working_directory = read_directory + test_directory
-            file_path = os.path.join(write_directory, test_directory + "_" + file_name)
-            
+        working_directory = read_directory + dataset
+        file_path = os.path.join(write_directory, dataset + "_" + file_name)
+
+        if not os.path.isfile(file_path):
             # Read respective tsv file and the write to test_utterances.csv
-            if not os.path.isfile(file_path):
-                with open (working_directory + "/" + tsv_file_name, 'r') as myfile:
-                    with open(file_path, 'w') as csv_file:
-                        for line in myfile:
+            with open (working_directory + "/" + tsv_file_name, 'r') as myfile:
+                with open(file_path, 'w') as csv_file:
+                    for line in myfile:
 
-                            fileContent = re.sub("\t", ",", line)
-                            csv_file.write(fileContent)
-            
-            # modify columns in the data set    
-            psstData = load_dataset('csv', data_files= write_directory + "/" + test_directory + "_" + file_name)
-            psstData = psstData.remove_columns(remove_columns)
+                        fileContent = re.sub("\t", ",", line)
+                        csv_file.write(fileContent)
 
-        elif dataset == train_directory:
-
-            working_directory = read_directory + train_directory
-            file_path = os.path.join(write_directory, train_directory + "_" + file_name)
-            
-            if not os.path.isfile(file_path):
-                with open (working_directory + "/" + tsv_file_name, 'r') as myfile:
-                    with open(file_path, 'w') as csv_file:
-                        for line in myfile:
-
-                            fileContent = re.sub("\t", ",", line)
-                            csv_file.write(fileContent)
-            
-            psstData = load_dataset('csv', data_files= write_directory + "/" + train_directory + "_" + file_name)
-            psstData = psstData.remove_columns(remove_columns)
-        
-        elif dataset == valid_directory:
-
-            working_directory = read_directory + valid_directory
-            file_path = os.path.join(write_directory, valid_directory + "_" + file_name)
-
-            if not os.path.isfile(file_path):
-                with open (working_directory + "/" + tsv_file_name, 'r') as myfile:
-                    with open(file_path, 'w') as csv_file:
-                        for line in myfile:
-
-                            fileContent = re.sub("\t", ",", line)
-                            csv_file.write(fileContent)
-            
-            psstData = load_dataset('csv', data_files= write_directory + "/" + valid_directory + "_" + file_name)
-            psstData = psstData.remove_columns(remove_columns)
+        # modify columns in the data set    
+        psstData = load_dataset('csv', data_files= write_directory + "/" + dataset + "_" + file_name)
+        psstData = psstData.remove_columns(remove_columns)
 
         print(psstData)
         return psstData
+
     except FileNotFoundError as e:
         print("Error: ", e)
 
