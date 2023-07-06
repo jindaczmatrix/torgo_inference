@@ -16,14 +16,13 @@ def convert_tsv_data_to_csv(dataset):
     """
     Reads in either the psst training, testing or validation data and writes is to a csv file. The function returns the dataset with 
     the desired column information
-
     Args: dataset - The dataset to read and convert to csv. 
     """
     try:
-        
+
         working_directory = read_directory + dataset
         file_path = os.path.join(write_directory, dataset + "_" + file_name)
-        
+
         if not os.path.isfile(file_path):
             # Read respective tsv file and the write to test_utterances.csv
             with open (working_directory + "/" + tsv_file_name, 'r') as myfile:
@@ -32,14 +31,14 @@ def convert_tsv_data_to_csv(dataset):
 
                         fileContent = re.sub("\t", ",", line)
                         csv_file.write(fileContent)
-            
+
         # modify columns in the data set    
         psstData = load_dataset('csv', data_files= write_directory + "/" + dataset + "_" + file_name)
         psstData = psstData.remove_columns(remove_columns)
 
         print(psstData)
         return psstData
-    
+
     except FileNotFoundError as e:
         print("Error: ", e)
 
