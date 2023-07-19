@@ -54,7 +54,7 @@ This repository contains files related to running ASR training to post-processin
 
 3. Links:
    -  Training Script: https://colab.research.google.com/drive/13OUCdq2V_IpmMvF_NOwZVwMZSAh0GfYy?usp=sharing
-   -  Evaluation and Testing Script: updated: evaluation and training.ipynb   
+   -  Evaluation and Testing Script: updated: evaluation and testing.ipynb   
    -  Script for F01 Speaker : https://colab.research.google.com/drive/1lhIKDb2JITULf3bgC97YQ1XM8frPV-AJ?usp=sharing
 
 4. All the Spelling correction models are available on Huggingface under Monideep Chakraborti's repository (https://huggingface.co/monideep2255)
