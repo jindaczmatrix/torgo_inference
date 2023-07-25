@@ -12,7 +12,8 @@ This repository contains files related to running ASR training to post-processin
 1. Basic understanding of wav2vec2 (will need to have a Huggingface and Google Collab account):
    - `Finetuning wav2vec tutorial`: https://huggingface.co/blog/fine-tune-wav2vec2-english
 2. Work with Torgo dataset:
-   - ASR finetuning of Torgo dataset with xlsr-53 wav2vec2 model: https://colab.research.google.com/drive/1kX_pBURiaujpuDYaB8O1hrLLQrK8bWsQ
+    - May 29, 2023 (Version 1): https://colab.research.google.com/drive/1kX_pBURiaujpuDYaB8O1hrLLQrK8bWsQ
+    - July 24, 2023 (Version 2, latest version): https://colab.research.google.com/drive/12D3XOoNT610DyrQQPBsGcZQh1LVJA7YO?usp=sharing
 3. Adding a language model: https://colab.research.google.com/drive/1AIgP6lc7BZTDrlU5yu83R05QDesWv4mw
 4. All the ASR models are available on Huggingface under Ian Yip's repository (https://huggingface.co/yip-i)
 
