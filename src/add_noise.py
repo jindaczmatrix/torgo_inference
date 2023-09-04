@@ -1,5 +1,7 @@
 import numpy as np
+import re
 import random
+import spacy
 from sentence_transformers import SentenceTransformer
 from sklearn.neighbors import BallTree
 import string
@@ -44,7 +46,7 @@ class NoisyDataGenerator:
     def generate_noise(self, data, words):
         noise_data = []
         if words:
-            self.add_noise_words(data)
+            noise_data = self.add_noise_words(data)
         else:
             data = self.generate_context(data)
             for record in data:
@@ -148,7 +150,32 @@ class NoisyDataGenerator:
             distorted_sentence.append(distorted_char)
         return ''.join(distorted_sentence)
 
+    def add_noise_words(self, data):
+        sim_words = []
+        for word in self.get_words(data):
+            phonetics = cf.pronouncing_dict.get(self.remove_special_characters(word.lower()))
+            if phonetics:
+                phonetics_no_stress = "".join([self.remove_stress(ph) for ph in phonetics[0]])
+                sim_words.append([word, phonetics_no_stress.lower()])
+        return sim_words
+
+
+
     @staticmethod
-    def add_noise_words(data):
+    def get_words(data):
+        all_words = set()
+        for sentence in data['sentences'].sample(n=10000, replace=False, random_state=42):
+            doc = cf.nlp(sentence)
+            tokens = [token.text.lower() for token in doc if not token.is_punct]
+            all_words.update(tokens)
 
+        return list(all_words)
 
+    @staticmethod
+    def remove_stress(phoneme):
+        return re.sub(r'\d', '', phoneme)
+
+    @staticmethod
+    def remove_special_characters(input_string):
+        pattern = '[^a-zA-Z0-9]'
+        return re.sub(pattern, '', input_string)

@@ -1,4 +1,7 @@
 import os
+import nltk
+import spacy
+from nltk.corpus import cmudict
 
 abs_path = os.path.abspath(__file__)
 proj_base_path = os.path.dirname(abs_path)
@@ -33,3 +36,8 @@ phonetic_substitutes = {
     'l': ['r'],
     'r': ['l']
 }
+
+nlp = spacy.load("en_core_web_sm")
+
+nltk.download('cmudict')
+pronouncing_dict = cmudict.dict()
